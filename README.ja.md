@@ -18,11 +18,15 @@
 
 ```
 so-arm101-lerobot-act-mac/
-├── README.md          # 英語版
-├── README.ja.md       # 日本語版（このファイル）
-├── LICENSE            # MIT License
+├── README.md            # 英語版
+├── README.ja.md         # 日本語版（このファイル）
+├── LICENSE              # MIT License
 ├── .gitignore
-└── scripts/           # データ収集 / 学習 / 評価のスクリプト
+└── scripts/
+    ├── preview_camera.py    # USB カメラのプレビュー確認
+    ├── record.sh            # テレオペでデータ収集（30 エピソード）
+    ├── train_act.sh         # ACT モデルを MPS で学習（30,000 step）
+    └── eval_act.sh          # 学習済みポリシーで自律推論
 ```
 
 ---
@@ -41,7 +45,8 @@ cd so-arm101-lerobot-act-mac
 本プロジェクトでは npm / pip ではなく [uv](https://docs.astral.sh/uv/) を使用します。
 
 ```bash
-uv init --python 3.12 .
+uv init --python 3.12 lerobot-workspace
+cd lerobot-workspace
 uv add "lerobot[feetech]>=0.5.1" matplotlib
 ```
 
@@ -60,24 +65,16 @@ uv run python -c "import torch; print(f'MPS available: {torch.backends.mps.is_av
 
 `MPS available: True` が出れば OK です。
 
-### 4. USB ポートの特定
-
-```bash
-uv run lerobot-find-port
-```
-
-Leader / Follower の device パス（例: `/dev/tty.usbmodem5B3D0430111` / `/dev/tty.usbmodem5B3D0430421`）を確認し、`scripts/` 配下のスクリプトを書き換えてください。
-
 ---
 
 ## 使い方
 
 ### データ収集（テレオペ）
 
-「黄色いアヒルをグレーのバスケットに入れる」操作を 30 エピソード収録します。
+「Pick up the yellow duck and put it in the basket」（黄色いアヒルをバスケットに入れる）操作を 30 エピソード収録します。
 
 ```bash
-bash scripts/record_main.sh
+bash scripts/record.sh
 ```
 
 ### 学習 (Mac MPS)
@@ -102,7 +99,7 @@ GPU active residency が ~99%、GPU 周波数が最高値（M2 系列なら 1398
 
 ### 評価（自律推論）
 
-評価したいチェックポイントのパスをスクリプトの中で指定してください。今回の実測では 20K / 25K のチェックポイントが最も良い性能でした。
+`scripts/eval_act.sh` 内の `CHECKPOINT` 変数で評価したい step を指定してください（デフォルトは `025000`）。今回の実測では 20K / 25K のチェックポイントが最も良い性能でした。
 
 ```bash
 bash scripts/eval_act.sh
@@ -115,8 +112,8 @@ bash scripts/eval_act.sh
 | Step | Loss | 実機成功率 |
 |---|---|---|
 | 5,000 | 0.327 | 0% |
-| 10,000 | 0.180 | 60% |
-| 15,000 | 0.124 | 80% |
+| 10,000 | 0.163 | 60% |
+| 15,000 | 0.120 | 80% |
 | **20,000** | **0.095** | **100%** |
 | **25,000** | **0.085** | **100%** |
 | 30,000 | 0.072 | 90%（過学習） |
@@ -125,12 +122,6 @@ bash scripts/eval_act.sh
 
 ---
 
-## ライセンス
-
-[MIT](LICENSE)
-
-## 謝辞
+## 参考
 
 - [LeRobot](https://github.com/huggingface/lerobot)（Hugging Face）
-- [SO-ARM101](https://github.com/TheRobotStudio/SO-ARM100)（The Robot Studio）
-- [ACT (Action Chunking Transformer)](https://tonyzhaozh.github.io/aloha/)
