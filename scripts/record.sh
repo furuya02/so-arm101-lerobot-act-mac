@@ -10,7 +10,7 @@ uv run lerobot-record \
     --teleop.port=/dev/tty.usbmodem5B3D0413001 \
     --teleop.id=my_leader \
     --display_data=true \
-    --dataset.repo_id=hirauchi/duck_pickup_v1 \
+    --dataset.repo_id=duck_pickup_v1 \
     --dataset.num_episodes=30 \
     --dataset.single_task="Pick up the yellow duck and put it in the basket" \
     --dataset.push_to_hub=false \
