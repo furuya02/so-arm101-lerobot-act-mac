@@ -74,10 +74,10 @@ Note the device paths for the Leader and Follower (e.g. `/dev/tty.usbmodem5B3D04
 
 ### Data collection (teleoperation)
 
-Record 30 episodes of "pick up the yellow rubber duck and place it in the gray basket".
+Record 30 episodes of "Pick up the yellow duck and put it in the basket".
 
 ```bash
-bash scripts/record_main.sh
+bash scripts/record.sh
 ```
 
 ### Training (Mac MPS)
@@ -102,7 +102,7 @@ You should see GPU active residency at ~99% and the GPU running at the maximum f
 
 ### Evaluation (autonomous inference)
 
-Replace the checkpoint path with the step you want to evaluate. The 20K / 25K checkpoints performed best in our run.
+Edit the `CHECKPOINT` variable inside `scripts/eval_act.sh` to choose the step to evaluate (defaults to `025000`). The 20K / 25K checkpoints performed best in our run.
 
 ```bash
 bash scripts/eval_act.sh
@@ -115,8 +115,8 @@ bash scripts/eval_act.sh
 | Step | Loss | Real-world success rate |
 |---|---|---|
 | 5,000 | 0.327 | 0% |
-| 10,000 | 0.180 | 60% |
-| 15,000 | 0.124 | 80% |
+| 10,000 | 0.163 | 60% |
+| 15,000 | 0.120 | 80% |
 | **20,000** | **0.095** | **100%** |
 | **25,000** | **0.085** | **100%** |
 | 30,000 | 0.072 | 90% (overfitting) |
