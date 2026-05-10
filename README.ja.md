@@ -18,11 +18,15 @@
 
 ```
 so-arm101-lerobot-act-mac/
-├── README.md          # 英語版
-├── README.ja.md       # 日本語版（このファイル）
-├── LICENSE            # MIT License
+├── README.md            # 英語版
+├── README.ja.md         # 日本語版（このファイル）
+├── LICENSE              # MIT License
 ├── .gitignore
-└── scripts/           # データ収集 / 学習 / 評価のスクリプト
+└── scripts/
+    ├── preview_camera.py    # USB カメラのプレビュー確認
+    ├── record.sh            # テレオペでデータ収集（30 エピソード）
+    ├── train_act.sh         # ACT モデルを MPS で学習（30,000 step）
+    └── eval_act.sh          # 学習済みポリシーで自律推論
 ```
 
 ---

@@ -18,11 +18,15 @@ This repository hosts the scripts referenced in the blog post **"ロボットア
 
 ```
 so-arm101-lerobot-act-mac/
-├── README.md          # This file (English)
-├── README.ja.md       # Japanese version
-├── LICENSE            # MIT License
+├── README.md            # This file (English)
+├── README.ja.md         # Japanese version
+├── LICENSE              # MIT License
 ├── .gitignore
-└── scripts/           # Shell / Python scripts for record / train / eval
+└── scripts/
+    ├── preview_camera.py    # USB camera preview check
+    ├── record.sh            # Teleop recording (30 episodes)
+    ├── train_act.sh         # Train ACT on MPS (30,000 steps)
+    └── eval_act.sh          # Autonomous inference with trained policy
 ```
 
 ---
