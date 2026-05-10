@@ -18,6 +18,7 @@ checkpoints/
 # Datasets / large files
 data/
 datasets/
+duck_pickup_v1/
 *.mp4
 *.mov
 *.avi
