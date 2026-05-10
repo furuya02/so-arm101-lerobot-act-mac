@@ -45,7 +45,8 @@ cd so-arm101-lerobot-act-mac
 This project uses [uv](https://docs.astral.sh/uv/) (not pip / npm).
 
 ```bash
-uv init --python 3.12 .
+uv init --python 3.12 lerobot-workspace
+cd lerobot-workspace
 uv add "lerobot[feetech]>=0.5.1" matplotlib
 ```
 
@@ -63,14 +64,6 @@ uv run python -c "import torch; print(f'MPS available: {torch.backends.mps.is_av
 ```
 
 Expected: `MPS available: True`.
-
-### 4. Identify USB ports
-
-```bash
-uv run lerobot-find-port
-```
-
-Note the device paths for the Leader and Follower (e.g. `/dev/tty.usbmodem5B3D0430111` / `/dev/tty.usbmodem5B3D0430421`) and update them in the scripts under `scripts/`.
 
 ---
 
@@ -129,12 +122,6 @@ Training time: ~6h 40m on M2 Mac. Estimated electricity cost: ~5–10 JPY.
 
 ---
 
-## License
-
-[MIT](LICENSE)
-
-## Acknowledgements
+## Reference
 
 - [LeRobot](https://github.com/huggingface/lerobot) by Hugging Face
-- [SO-ARM101](https://github.com/TheRobotStudio/SO-ARM100) by The Robot Studio
-- [ACT (Action Chunking Transformer)](https://tonyzhaozh.github.io/aloha/)

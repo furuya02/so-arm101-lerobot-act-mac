@@ -45,7 +45,8 @@ cd so-arm101-lerobot-act-mac
 本プロジェクトでは npm / pip ではなく [uv](https://docs.astral.sh/uv/) を使用します。
 
 ```bash
-uv init --python 3.12 .
+uv init --python 3.12 lerobot-workspace
+cd lerobot-workspace
 uv add "lerobot[feetech]>=0.5.1" matplotlib
 ```
 
@@ -63,14 +64,6 @@ uv run python -c "import torch; print(f'MPS available: {torch.backends.mps.is_av
 ```
 
 `MPS available: True` が出れば OK です。
-
-### 4. USB ポートの特定
-
-```bash
-uv run lerobot-find-port
-```
-
-Leader / Follower の device パス（例: `/dev/tty.usbmodem5B3D0430111` / `/dev/tty.usbmodem5B3D0430421`）を確認し、`scripts/` 配下のスクリプトを書き換えてください。
 
 ---
 
@@ -129,12 +122,6 @@ bash scripts/eval_act.sh
 
 ---
 
-## ライセンス
-
-[MIT](LICENSE)
-
-## 謝辞
+## 参考
 
 - [LeRobot](https://github.com/huggingface/lerobot)（Hugging Face）
-- [SO-ARM101](https://github.com/TheRobotStudio/SO-ARM100)（The Robot Studio）
-- [ACT (Action Chunking Transformer)](https://tonyzhaozh.github.io/aloha/)
