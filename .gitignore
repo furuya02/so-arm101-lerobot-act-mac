@@ -1,0 +1,42 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.Python
+*.so
+
+# uv / venv
+.venv/
+.python-version
+
+# LeRobot outputs
+outputs/
+wandb/
+checkpoints/
+
+# Datasets / large files
+data/
+datasets/
+*.mp4
+*.mov
+*.avi
+*.parquet
+*.arrow
+
+# Logs
+*.log
+log.txt
+logs/
+
+# Mac
+.DS_Store
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# Env
+.env
+.env.local
