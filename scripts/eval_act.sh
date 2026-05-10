@@ -11,7 +11,7 @@ uv run lerobot-record \
     --robot.id=my_follower \
     --robot.cameras="{ front: {type: opencv, index_or_path: 1, width: 640, height: 480, fps: 15} }" \
     --display_data=true \
-    --dataset.repo_id=hirauchi/${EVAL_NAME} \
+    --dataset.repo_id=${EVAL_NAME} \
     --dataset.num_episodes=1 \
     --dataset.single_task="Pick up the yellow duck and put it in the basket" \
     --dataset.push_to_hub=false \
